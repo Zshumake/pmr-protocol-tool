@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">{{ mode }} Protocol</h2>
+
+<form method="post" class="space-y-4">
+  <div>
+    <label class="block font-semibold">Issue</label>
+    <input type="text" name="issue" value="{{ protocol.issue if protocol else '' }}" class="w-full border p-2 rounded" required>
+  </div>
+
+  <div>
+    <label class="block font-semibold">Category</label>
+    <input type="text" name="category" value="{{ protocol.category if protocol else '' }}" class="w-full border p-2 rounded">
+  </div>
+
+  <div>
+    <label class="block font-semibold">Priority</label>
+    <select name="priority" class="w-full border p-2 rounded">
+      {% for p in ['High', 'Medium', 'Low'] %}
+        <option value="{{ p }}" {% if protocol and protocol.priority == p %}selected{% endif %}>{{ p }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div>
+    <label class="block font-semibold">Steps</label>
+    <div id="step-container">
+      {% if protocol %}
+        {% for step in protocol.steps %}
+          <input type="text" name="steps" value="{{ step }}" class="w-full border p-2 rounded mb-2" required>
+        {% endfor %}
+      {% else %}
+        <input type="text" name="steps" class="w-full border p-2 rounded mb-2" required>
+      {% endif %}
+    </div>
+    <button type="button" onclick="addStep()" class="text-blue-600 hover:underline mt-1">+ Add Step</button>
+  </div>
+
+  <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded">Save</button>
+</form>
+
+<script>
+  function addStep() {
+    const container = document.getElementById('step-container');
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.name = 'steps';
+    input.required = true;
+    input.className = 'w-full border p-2 rounded mb-2';
+    container.appendChild(input);
+  }
+</script>
+{% endblock %}
+

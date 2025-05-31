@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-2xl font-bold mb-4">Admin Protocol Management</h2>
+<a href="/admin/new" class="inline-block mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">
+  ➕ Add New Protocol
+</a>
+<div class="overflow-x-auto">
+  <table class="min-w-full bg-white border rounded-lg">
+    <thead>
+      <tr class="bg-gray-100 text-left">
+        <th class="py-2 px-4">Issue</th>
+        <th class="py-2 px-4">Category</th>
+        <th class="py-2 px-4">Priority</th>
+        <th class="py-2 px-4">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="protocol-list">
+      {% for protocol_id, protocol in protocols %}
+        <tr class="border-b hover:bg-gray-50 cursor-move" data-id="{{ protocol_id }}">
+          <td class="py-2 px-4">{{ protocol.issue }}</td>
+          <td class="py-2 px-4">{{ protocol.category }}</td>
+          <td class="py-2 px-4">
+            {% if protocol.priority == 'High' %}<span class="text-red-600 font-semibold">High</span>{% endif %}
+            {% if protocol.priority == 'Medium' %}<span class="text-yellow-600 font-semibold">Medium</span>{% endif %}
+            {% if protocol.priority == 'Low' %}<span class="text-green-600 font-semibold">Low</span>{% endif %}
+          </td>
+          <td class="py-2 px-4">
+            <a href="/admin/edit/{{ protocol_id }}" class="text-blue-500 hover:underline">Edit</a>
+            <form action="/admin/delete/{{ protocol_id }}" method="post" class="inline">
+              <button type="submit" class="text-red-500 ml-2 hover:underline" onclick="return confirm('Delete this protocol?')">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+<script>
+  const protocolList = document.getElementById('protocol-list');
+  Sortable.create(protocolList, {
+    animation: 150,
+    onEnd: function (evt) {
+      console.log('New order:', [...protocolList.children].map(tr => tr.dataset.id));
+    }
+  });
+</script>
+{% endblock %}

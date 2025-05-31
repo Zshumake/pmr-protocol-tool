@@ -1,0 +1,43 @@
+{
+  "proto001": {
+    "issue": "Management of DVT",
+    "category": "Vascular",
+    "priority": "High",
+    "steps": [
+      "If anticoagulation safe, start therapeutic Lovenox or heparin"
+    ]
+  },
+  "proto002": {
+    "issue": "Fever in hospitalized patient",
+    "category": "Infectious Disease",
+    "priority": "High",
+    "steps": [
+      "Assess for signs/symptoms (cough, dysuria, redness, etc)",
+      "Review recent cultures and trends",
+      "Order UA and chest X-ray if no clear source",
+      "Start empiric antibiotics if clinically indicated"
+    ]
+  },
+  "proto003": {
+    "issue": "New or worsening pain",
+    "category": "General Medicine",
+    "priority": "Medium",
+    "steps": [
+      "Ask patient to localize pain and describe character",
+      "Review vitals for red flags (fever, tachycardia)",
+      "Consider labs/imaging if unexplained or severe",
+      "Trial PRN meds (acetaminophen, topical agents, opioids if appropriate)"
+    ]
+  },
+  "proto004": {
+    "issue": "Constipation",
+    "category": "GI",
+    "priority": "Low",
+    "steps": [
+      "Ask last bowel movement, assess abdominal symptoms",
+      "Review current regimen (Senna, docusate, Miralax, etc)",
+      "Escalate stepwise: add suppository, then enema if needed",
+      "Check KUB if no response and abdominal pain/bloating"
+    ]
+  }
+}
